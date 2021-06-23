@@ -8,14 +8,18 @@ OPTION( BUILD_static "Build static library" OFF )
 OPTION( BUILD_test "Build test application" OFF )
 
 if( BUILD_static )
-add_library (LMS1xx STATIC LMS1xx.cpp)
+    add_library (LMS1xx STATIC LMS1xx.cpp)
 else( BUILD_static )
-add_library (LMS1xx SHARED LMS1xx.cpp)
+    add_library (LMS1xx SHARED LMS1xx.cpp)
 endif( BUILD_static )
 
+if(WIN32)
+  target_link_libraries(LMS1xx wsock32 ws2_32)
+endif()
+
 if( BUILD_test )
-add_executable ( test test.cpp )
-target_link_libraries ( test LMS1xx )
+    add_executable ( test test.cpp )
+    target_link_libraries ( test LMS1xx )
 endif( BUILD_test )
 
 install( TARGETS LMS1xx LIBRARY DESTINATION lib )

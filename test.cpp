@@ -25,15 +25,19 @@
 
 #include <iostream>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 int main()
 {
 	LMS1xx laser;
 	scanData data;
 
-	laser.connect("192.168.1.2");
-	if(!laser.isConnected())
+	laser.connect("192.168.1.101", 2112);
+	if (!laser.isConnected())
 	{
-		std::cout << "connection failend" << std::endl;
+		std::cout << "connection fail" << std::endl;
 		return 0;
 	}
 
@@ -75,14 +79,19 @@ int main()
 	{
 		ret = laser.queryStatus();
 		std::cout << "status : " << ret << std::endl;
+
+#ifdef _WIN32
+		Sleep(1000);
+#else
 		sleep(1);
+#endif
 	}
 	std::cout << "Laser ready" << std::endl;
 
 	std::cout << "Start continuous data transmission ..." << std::endl;
 	laser.scanContinous(1);
 
-	for(int i =0; i < 3; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		std::cout << "Receive data sample ..." << std::endl;
 		laser.getData(data);

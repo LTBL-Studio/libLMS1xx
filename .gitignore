@@ -1,0 +1,13 @@
+.vs
+*.vcxproj
+*.vcxproj.filters
+CMakeCache.txt
+cmake_install.cmake
+*.sln
+CMakeFiles
+*.vcxproj.user
+x64
+test.dir
+Release
+LMS1xx.dir
+Debug
