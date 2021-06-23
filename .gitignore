@@ -11,3 +11,5 @@ test.dir
 Release
 LMS1xx.dir
 Debug
+install_manifest.txt
+build
